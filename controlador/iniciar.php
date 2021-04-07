@@ -4,12 +4,12 @@
         if(isset($_POST['usuario']) && isset($_POST['password'])){
             $usuario = $_POST['usuario'];
             $password = $_POST['password'];
-    
+            $pw = base64_encode($password);
             if($usuario === "" || $password === "" || $usuario === null || $password === null){
                 $mensaje = array("type"=>"error","mensaje"=>"Error complete los campos");
                 echo json_encode($mensaje);
             } else {
-                $mensaje = array("type"=>"success","mensaje"=>"Bienvenido");
+                $mensaje = array("type"=>"success","mensaje"=>"Bienvenido ".$usuario);
                 echo json_encode($mensaje);
             }
         } else {

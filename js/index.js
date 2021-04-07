@@ -56,30 +56,26 @@ const hideSpinner = () => {
 
 const mostrarNotificacion = (res) => {
     try {
-        if(res.type == "success"){
-            swal({
-                title: res.type,
-                text: res.mensaje
-            })
-        } else {
-            swal({
-                title: res.type,
-                text: res.mensaje
-            })
-        }
+        let answer = JSON.parse(res)
+        swal({
+            title: answer.type,
+            text: answer.mensaje,
+            icon: "success"
+        })
     } catch (error) {
-        
+
     }
 }
 
 const recolectarData = (user, pass) => {
     let us = validarUsuario(user);
     let pw = validarPassword(pass);
-    if (us !== "" && pw !== "") {
+    if (us && pw) {
+
         const datos = { "usuario": us, "password": pw };
         setTimeout(() => {
             $.ajax({
-                url: "controlador/iniciar.php",
+                url: "modelo/iniciarModelo.php",
                 data: datos,
                 type: "post",
                 success: (res) => {
@@ -87,6 +83,7 @@ const recolectarData = (user, pass) => {
                 }
             })
         }, 2000);
+
     }
 }
 
