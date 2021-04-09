@@ -37,8 +37,6 @@
                     $userC = new usuarioController();
                     $res = $userC->validarUsuario($this->Usuario,$this->Password);
                     echo json_encode($res);
-                    //$mensaje = array("type"=>"success","mensaje"=>"Bienvenido ".$this->usuario);
-                    //echo json_encode($mensaje);
                 }
             } catch (EXception $e) {
                 $mensaje = array("type"=>"error","mensaje"=>"Un error ha ocurrido ".$e);

@@ -1,7 +1,7 @@
 <?php
     class Conexion{
 
-        
+        //Habilitar esta parte del codigo
         /*public function obtenerEstado(){
             $path = "C:\\WIL\\Config.ini";
             //Ya esta leyendo el archivo configuracion

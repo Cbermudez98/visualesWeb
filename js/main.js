@@ -63,15 +63,17 @@ const mostrarNotificacion = (res) => {
                 text: answer.mensaje,
                 icon: "error"
             })
-        } else {
+        } else if(answer.type = "success") {
             swal({
                 title: answer.type,
                 text: answer.mensaje,
                 icon: "success"
             })
+
+            window.location.href = "menuPrincipal.html";
         }
     } catch (error) {
-
+        alert("Error "+e)
     }
 }
 
