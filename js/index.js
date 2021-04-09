@@ -1,6 +1,6 @@
 const validarUsuario = (userReq) => {
     try {
-        let user = userReq.value;
+        let user = userReq.value.toUpperCase();
         let smallus = document.getElementById('small-email');
         if (user == "" || user == null) {
             smallus.classList.remove = "hidden";
@@ -57,33 +57,48 @@ const hideSpinner = () => {
 const mostrarNotificacion = (res) => {
     try {
         let answer = JSON.parse(res)
-        swal({
-            title: answer.type,
-            text: answer.mensaje,
-            icon: "success"
-        })
+        if (answer.type == "error") {
+            swal({
+                title: answer.type,
+                text: answer.mensaje,
+                icon: "error"
+            })
+        } else {
+            swal({
+                title: answer.type,
+                text: answer.mensaje,
+                icon: "success"
+            })
+        }
     } catch (error) {
 
+    }
+}
+
+const vaciarImput = (us, pa) => {
+    try {
+        us.value = "";
+        pa.value = "";
+    } catch (error) {
+        alert("Error al limpiar los campos");
     }
 }
 
 const recolectarData = (user, pass) => {
     let us = validarUsuario(user);
     let pw = validarPassword(pass);
-    if (us && pw) {
+    if (us || pw) {
 
         const datos = { "usuario": us, "password": pw };
-        setTimeout(() => {
-            $.ajax({
-                url: "modelo/iniciarModelo.php",
-                data: datos,
-                type: "post",
-                success: (res) => {
-                    mostrarNotificacion(res);
-                }
-            })
-        }, 2000);
-
+        $.ajax({
+            url: "modelo/usuarioModelo.php",
+            data: datos,
+            type: "post",
+            success: (res) => {
+                mostrarNotificacion(res);
+                vaciarImput(user, pass);
+            }
+        })
     }
 }
 

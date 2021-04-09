@@ -5,33 +5,31 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-    crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="recursos/bootstrap.min.css">
+  <script src="recursos/jquery-3.5.1.slim.min.js"></script>
+  <script src="recursos/jquery.min.js"></script>
+  <script src="recursos/sweetalert.min.js"></script>
+
   <title>Visuales</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="shortct icon" href="Iconos/visual.png">
   <script src="js/index.js"></script>
 </head>
 
-<body class="bg-info">
-  <div class="container col-md-4 mt-5 hidden-sm bg-white">
-    <p class="h1 col-md-6 text-muted">Iniciar Sesion</p>
+<body class="bg-primary">
+  
+  <div class="container col-md-4 mt-5 hidden-sm bg-light rounded align-middle">
+    <img src="iconos/visual.png" class="img-fluid mx-auto d-block" alt="logo_visual">
+    <p class="h1 col-md-6 mx-auto text-center">VISUALES</p>
     <form class="px-4 py-3" id="form-sign-in">
       <div class="form-group">
         <label for="exampleDropdownFormEmail1">Nombre Usuario</label>
-        <input type="text" class="form-control" id="user" placeholder="Nombre de Usuario">
+        <input type="text" class="form-control text-primary text-uppercase" id="user" autocomplete="off">
         <small id="small-email" class="text-danger hidden">Error al ingresar el nombre de usuario</small>
       </div>
       <div class="form-group">
         <label for="exampleDropdownFormPassword1">Contraseña</label>
-        <input type="password" class="form-control" id="password" placeholder="Contraseña">
+        <input type="password" class="form-control text-primary" id="password">
         <small id="small-password" class="text-danger hidden">Error al ingresar la Contraseña</small>
       </div>
       <button type="submit" class="btn btn-primary">Ingresar</button>
