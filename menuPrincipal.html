@@ -5,64 +5,84 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="recursos/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="recursos/jquery-3.5.1.slim.min.js"></script>
   <script src="recursos/jquery.min.js"></script>
   <script src="recursos/sweetalert.min.js"></script>
-
+  <script src="recursos/bootstrap.min.js"></script>
+  <script src="recursos/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="recursos/bootstrap.min.css">
+  
   <title>Visuales</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortct icon" href="Iconos/visual.png">
-  <script src="js/main.js"></script>
+  <script src="js/cargarTablaDefectos.js"></script>
+  <script src="js/cargarTabla.js"></script>
+  <script src="js/session.js"></script>
+  
 </head>
 
 <body class="bg-white">
-  <!--Navbar-->
-  <!-- Just an image -->
   <nav class="navbar navbar-primary bg-primary">
     <img src="Iconos/logoAutotest.png" width="120" height="60" alt="Logo Autotest s.a.s">
-    <p class="font-weight-bold text-right">Usuario Logeado @NombreUsuario</p>
-    <button type="button" class="btn btn-danger">Cerrar sesion</button>
+    <p class="font-weight-bold text-right" id="userLog"></p>
+    <a type="button" class="btn btn-danger" href="#" id="logout">Cerrar sesion</a>
   </nav>
 
-  <table class="table table-hover">
-    <thead class="bg-ligt">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Hora</th>
-        <th scope="col">Consecutivo</th>
-        <th scope="col">Placa</th>
-        <th scope="col">Vehiculo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-    </tbody>
-  </table>
-</body>
+  <div class="table-responsive">
+    <table class="table table-hover" id="tablaVehiculos">
+      <thead class="bg-ligt">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Consecutivo</th>
+          <th scope="col">Placa</th>
+          <th scope="col">Vehiculo</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody id='tbody'>
+        
+      </tbody>
+    </table>
 
+    <div class="modal fade" id="modalDefectos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p class="text-info mr-2">Consecutivo: <small class="text-dark" id="consecutivo"></small></p>
+            <p class="text-info mr-2">Fecha: <small class="text-dark" id="fecha"></small></p>
+            <p class="text-info mr-2">Hora: <small class="text-dark" id="hora"></small></p>
+            <p class="text-info mr-2">Placa: <small class="text-dark" id="placa"></small></p>
+            <p class="text-info mr-2">Tipo Vehiculo: <small class="text-dark" id="tipoVehiculo"></small></p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-hover" id="tablaDefectos">
+              <thead class="bg-ligt">
+                <tr>
+                  <th scope="col">Grupo</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Resultado</th>
+                  <th scope="col">CodError</th>
+                </tr>
+              </thead>
+              <tbody id='tbodyDefectos'>
+                
+              </tbody>
+          </div>
+          <!--Terminar de cuadar esta parte del codigo que siempre esta arriba-->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

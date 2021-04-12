@@ -24,16 +24,34 @@
 
                 if(!$result){
                     $mensaje = array("type"=>"error","mensaje"=>"Error no se encontro el usuario");
-                    return json_encode($mensaje);
+                    return $mensaje;
                 } else {
                     //Crear variables de session y configurar la configuracion de cookies
-                    $mensaje = array("type"=>"success","mensaje"=>"Bienvenido ".$user);
+                    session_start();
+                    $_SESSION['user'] = $result['usuario'];
+                    $mensaje = array("type"=>"success","mensaje"=>$_SESSION['user']);
                     return $mensaje;
                 }
 
             } catch (PDOException $e) {
                 $mensaje = array("type"=>"error","mensaje"=>"Error al verificar los datos ".$e);
                 return $mensaje;
+            }
+        }
+
+        public function logOut($user){
+            try {
+                session_start();
+                if(isset($_SESSION['user'])){
+                    session_destroy();
+                    $mensaje = array("type"=>"success","mensaje"=>"Exito al cerrar sesion");
+                    return $mensaje;
+                } else {
+                    $mensaje = array("type"=>"error","mensaje"=>"Error no ha iniciado session");
+                    return $mensaje;
+                }
+            } catch (EXception $e) {
+                $mensaje = array("type"=>"error","mensaje"=>"Error al cerrar sesion");
             }
         }
         

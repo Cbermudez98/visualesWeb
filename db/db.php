@@ -33,6 +33,7 @@
                 $mdb = new PDO('mysql:host='.$db_host.':'.$port.';dbname='.$db_name,$db_user,$db_pass);
                 //echo "Exito al conextar a la base de dato";
                 //echo "Exito al conextar a la base de datos";
+                $mdb->exec("set names utf8");
                 return $mdb;
             } catch (PDOException $e) {
                 die("Error en la conexion a la base de datos ".$e->getMessage());

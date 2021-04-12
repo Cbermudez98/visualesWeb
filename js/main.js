@@ -12,7 +12,10 @@ const validarUsuario = (userReq) => {
             //Aqui se agregara al objeto json para enviar al backend
         }
     } catch (error) {
-        alert("Something went wrong " + error)
+        swal({
+            title: "Error campo usuario",
+            text: "Se ha detectado un error en campo usuario"
+        })
     }
 }
 
@@ -30,27 +33,10 @@ const validarPassword = (pass) => {
             return passwordReq;
         }
     } catch (error) {
-        alert("Something went wrong " + error);
-    }
-}
-
-const showSpinner = () => {
-    try {
-        let spin = document.getElementById('spinner');
-        spin.classList.remove = " hidden";
-        spin.className += " show";
-    } catch (error) {
-        alert("Error al cargar pre loader")
-    }
-}
-
-const hideSpinner = () => {
-    try {
-        let spin = document.getElementById('spinner');
-        spin.classList.remove = " show";
-        spin.className += " hidden";
-    } catch (error) {
-
+        swal({
+            title: "Error campo contraseña",
+            text: "Ha ocurrido un error ne el campo contraseña " + error
+        })
     }
 }
 
@@ -63,17 +49,22 @@ const mostrarNotificacion = (res) => {
                 text: answer.mensaje,
                 icon: "error"
             })
-        } else if(answer.type = "success") {
+        } else if (answer.type = "success") {
             swal({
                 title: answer.type,
                 text: answer.mensaje,
                 icon: "success"
+            }).then(() => {
+                crearLog(answer.mensaje)
+                window.location.href = "menuPrincipal.html";
             })
-
-            window.location.href = "menuPrincipal.html";
         }
     } catch (error) {
-        alert("Error "+e)
+        alert(res);
+        swal({
+            title: "Error al ejecutar",
+            text: "Se ha producido un error " + error
+        })
     }
 }
 
@@ -82,30 +73,42 @@ const vaciarImput = (us, pa) => {
         us.value = "";
         pa.value = "";
     } catch (error) {
-        alert("Error al limpiar los campos");
+        swal({
+            title: "Error",
+            text: "Se produjo un error al vaciar los campos",
+            icon: "error"
+        })
     }
 }
 
 const recolectarData = (user, pass) => {
-    let us = validarUsuario(user);
-    let pw = validarPassword(pass);
-    if (us || pw) {
+    try {
+        let us = validarUsuario(user);
+        let pw = validarPassword(pass);
+        if (us || pw) {
 
-        const datos = { "usuario": us, "password": pw };
-        $.ajax({
-            url: "modelo/usuarioModelo.php",
-            data: datos,
-            type: "post",
-            success: (res) => {
-                mostrarNotificacion(res);
-                vaciarImput(user, pass);
-            }
+            const datos = { "peticion":"logIn","usuario": us, "password": pw };
+            $.ajax({
+                url: "modelo/usuarioModelo.php",
+                data: datos,
+                type: "post",
+                success: (res) => {
+                    mostrarNotificacion(res);
+                    vaciarImput(user, pass);
+                }
+            })
+        }
+    } catch (error) {
+        swal({
+            icon: "error",
+            title: "Error",
+            text: "Error en la recoleccion de datos"
         })
     }
 }
 
 window.onload = () => {
-
+    validarLog1();
     const form = document.getElementById('form-sign-in');
 
     form.onsubmit = (e) => {

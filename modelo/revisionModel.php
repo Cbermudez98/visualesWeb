@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['user'])){
+        die("Error no tiene autorizacion para estar aqui");
+    }
+
+    require_once('../controlador/revisionController.php');
     class Revision{
         public $fecha;
         public $hora;
@@ -61,6 +67,32 @@
 
         public function setVisible($visible){
             $this->visible = $visible;
+        }
+
+        public function peticionDatos(){
+            try {
+                $rev = new revisionController();
+                $res = $rev->listarVehiculos();
+                return $res;
+            } catch (EXception $e) {
+                $mensaje = array("type"=>"error","mensaje"=>"error en la peticion");
+                return json_encode($mensaje);
+            }
+        }
+    }
+
+    if(isset($_POST['peticion'])){
+        $peticion = $_POST['peticion'];
+        switch ($peticion) {
+            case 'llenarTabla':
+                $rev = new Revision();
+                $res = $rev->peticionDatos();
+                echo $res;
+                break;
+            
+            default:
+                # code...
+                break;
         }
     }
 ?>
