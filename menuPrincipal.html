@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
@@ -48,7 +48,7 @@
     </table>
 
     <div class="modal fade" id="modalDefectos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <p class="text-info mr-2">Consecutivo: <small class="text-dark" id="consecutivo"></small></p>
@@ -74,9 +74,146 @@
               <tbody id='tbodyDefectos'>
                 
               </tbody>
+            </table>
           </div>
           <!--Terminar de cuadar esta parte del codigo que siempre esta arriba-->
           <div class="modal-footer">
+            <!--Tabla de labrado mas inputs-->
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">labrado</th>
+                  <th scope="col">Eje1</th>
+                  <th scope="col">Eje2</th>
+                  <th scope="col">Eje2</th>
+                  <th scope="col">Eje3</th>
+                  <th scope="col">Eje3</th>
+                  <th scope="col">Eje4</th>
+                  <th scope="col">Eje4</th>
+                  <th scope="col">Eje5</th>
+                  <th scope="col">Eje5</th>
+                  <th scope="col">Repuesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Izquierda</th>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Derecha</th>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                </tr>
+              </tbody>
+            </table>
+            <!--Fin de tabla de labrado-->
+            <!--Tabla de presion-->
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Presión</th>
+                  <th scope="col">Eje1</th>
+                  <th scope="col">Eje2</th>
+                  <th scope="col">Eje2</th>
+                  <th scope="col">Eje3</th>
+                  <th scope="col">Eje3</th>
+                  <th scope="col">Eje4</th>
+                  <th scope="col">Eje4</th>
+                  <th scope="col">Eje5</th>
+                  <th scope="col">Eje5</th>
+                  <th scope="col">Repuesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Izquierda</th>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Derecha</th>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                  <td><input class="form-control form-control-sm" type="text"></td>
+                </tr>
+              </tbody>
+            </table>
+            <!--Checkbox para simultaneas-->
+            
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lBajaSimultDer">
+              <label class="form-check-label" for="lBajaSimultDer">
+                L. Baja Simultanea Der
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lBajaSimultIzq">
+              <label class="form-check-label" for="lBajaSimultIzq">
+                L. Baja Simultanea Izq
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lAltaSimultDer">
+              <label class="form-check-label" for="lAltaSimultDer">
+                L. Alta Simultanea Der
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lAltaSimultIzq">
+              <label class="form-check-label" for="lAltaSimultIzq">
+                L. Alta Simultanea Izq
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lAntiSimultDer">
+              <label class="form-check-label" for="lAntiSimultDer">
+                L. Anti Simultanea Der
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lAntiSimultIzq">
+              <label class="form-check-label" for="lAntiSimultIzq">
+                L. Anti Simultanea Izq
+              </label>
+            </div>
+            <!--Observaciones-->
+            <div class="form-group col-12">
+              <label for="observaciones" class="h6">Observaciones</label>
+              <textarea class="form-control" id="observaciones" rows="2"></textarea>
+            </div>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-primary">Enviar</button>
           </div>

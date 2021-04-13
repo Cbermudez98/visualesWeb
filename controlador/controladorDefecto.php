@@ -9,7 +9,7 @@
 
         public function getDefectos($tipoVehiculo){
             try {
-                $query = $this->db->prepare('SELECT * FROM defectos where tipovehiculo = "'.$tipoVehiculo.'"');
+                $query = $this->db->prepare('SELECT * FROM defectos where tipovehiculo = "'.$tipoVehiculo.'" and tipo != "" and grupo != "" and tipovehiculo != ""');
                 $query->execute();
                 $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 if($res){

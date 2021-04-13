@@ -9,3 +9,27 @@
 tr{
     cursor: pointer;
 }
+
+tr::selection{
+    user-select: none;
+}
+
+td::selection{
+    user-select: none;
+}
+
+table::selection{
+    user-select: none;
+}
+
+th::selection{
+    user-select: none;
+}
+
+input[type="checkbox"]{
+    cursor: pointer;
+}
+
+label{
+    cursor: pointer;
+}

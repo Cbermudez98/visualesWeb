@@ -70,11 +70,20 @@
         $peticion = $_POST['peticion'];
 
         switch ($peticion) {
-            case 'llenarTabla':
+            case 'llenarTablaDefecto':
                 if(isset($_POST['tipoVehiculo'])){
-                    setTipoVehiculo($_POST['tipoVehiculo']);
+                    if($_POST['tipoVehiculo'] == "MOTOCICLETA"){
+                        $tv = "moto";
+                    }
+
+                    if($_POST['tipoVehiculo'] == "AUTOMOVIL" || $_POST['tipoVehiculo'] == "CAMPERO"){
+                        $tv = "carro";
+                    }
+                    
                     $de = new Defecto();
-                    $res = $de->getDefectos(getTipoVehiculo());
+                    $de->setTipoVehiculo($tv);
+                    //echo $de->getTipoVehiculo();
+                    $res = $de->getDefectos($de->getTipoVehiculo());
                     echo $res;
                 }
                 break;

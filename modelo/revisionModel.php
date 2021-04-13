@@ -79,6 +79,17 @@
                 return json_encode($mensaje);
             }
         }
+
+        public function verificarRevision($consevutivo){
+            try {
+                $rev = new revisionController();
+                $res = $rev->verficiarRevision($consevutivo);
+                echo $res;
+            } catch (EXception $e) {
+                $mensaje = array('type'=>'error','mensaje'=>'Error al verificar la revision del automovil '.$e);
+                echo json_encode($mensaje);
+            }
+        }
     }
 
     if(isset($_POST['peticion'])){
@@ -95,4 +106,7 @@
                 break;
         }
     }
+
+    //$re = new Revision();
+    //$re->verificarRevision('20082253');
 ?>
