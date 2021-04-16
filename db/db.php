@@ -1,30 +1,29 @@
 <?php
+    require_once('config.php');
     class Conexion{
 
-        //Habilitar esta parte del codigo
-        /*public function obtenerEstado(){
-            $path = "C:\\WIL\\Config.ini";
-            //Ya esta leyendo el archivo configuracion
-            $file = fopen($path, "r");
-            $aux = [];
-            $auxLine = 0;
-            while(!feof($file)){
-                $aux[$auxLine] = fgets($file);
-                $auxLine++;
-            }
-
-            for ($i=0; $i < count($aux) ; $i++) { 
-                echo $aux[$i]."</br>";
-            }
-
-            fclose($file);
-        }*/
-
         public static function conectar(){
-            $db_name = "newwilnewfinal";
+            //Leer el archivo config.php
+            $config = new Config();
+            $arr = $config->obtenerEstado();
+            //print_r($arr);
+            $db = "";
+            $host = "";
+            
+            if(trim($arr[1]) == "prev=true"){
+                $db = "preventiva";
+            }
+
+            if(trim($arr[1]) == "prev=false"){
+                $db = "newwilnewfinal";
+            }
+            
+            if(trim($arr[0]) == "localhost")
+
+            $db_name = $db;
             $db_user = "root";
             $db_pass = "123456789";
-            $db_host = "localhost";
+            $db_host = $host;
             $port = "3307";
             /* Linea de conexion con mysql workbench----- "mysql:host=localhost;dbname=newwilnewfinal",$db_user,$db_name */
 
@@ -41,6 +40,6 @@
         }
     }
     //Validar si la conexion se esta realizando
-    //$con = new Conexion();
-    //$con->conectar();
+    $con = new Conexion();
+    $con->conectar();
 ?>

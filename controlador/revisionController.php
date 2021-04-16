@@ -32,6 +32,25 @@
             }
         }
 
+        public function validarDiasRevision($fecha,$placa){
+            try {
+                $sql = $this->db->prepare("SELECT TIMESTAMPDIFF(DAY,'".$fecha."',CURDATE()) AS dias_transcurridos FROM visual WHERE placa = '".$placa."' ORDER BY consecutivowil ASC limit 1");
+                $sql->execute();
+                $res = $sql->fetchAll(PDO::FETCH_ASSOC);
+                if(!$res){
+                    $mensaje = array('type'=>'error','mensaje'=>'no se entro dato');
+                    return json_encode($mensaje);
+                } else {
+                    $mensaje = json_encode($res);
+                    return $mensaje;
+                }
+
+            } catch (PDOEXception $e) {
+                $mensaje = array('error'=>'error','mensaje'=>'Error al ejecutar la consulta '.$e);
+                return json_encode($mensaje);
+            }
+        }
+
         public function verficiarRevision($consecutivo){
             try {
                 $query = $this->db->prepare("SELECT resultado,codigodefecto,tipo FROM visual where consecutivowil = '".$consecutivo."' and resultado = 'I'");
@@ -42,8 +61,9 @@
                 if($res){
                     echo json_encode($res);
                 }else{
-                    echo "No se encontraron datos ";
-                } 
+                    $mensaje = array('type'=>'error','mensaje'=>'No se encontraron datos');
+                    echo json_encode($mensaje);
+                }
 
             } catch (PDOEXception $e) {
                 $mensaje = array('type'=>'error','mensaje'=>'Error en la consulta de revision '.$e);
@@ -54,4 +74,5 @@
 
     //$rc = new revisionController();
     //$rc->verficiarRevision('20082251');
+    //$rc->validarDiasRevision('2020-09-28',"SDH09E");
 ?>

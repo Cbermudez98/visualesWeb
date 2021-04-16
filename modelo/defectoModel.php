@@ -75,7 +75,7 @@
                     if($_POST['tipoVehiculo'] == "MOTOCICLETA"){
                         $tv = "moto";
                     }
-
+                    //Terminar de validar todos los campos
                     if($_POST['tipoVehiculo'] == "AUTOMOVIL" || $_POST['tipoVehiculo'] == "CAMPERO"){
                         $tv = "carro";
                     }

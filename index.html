@@ -9,16 +9,21 @@
   <script src="recursos/jquery-3.5.1.slim.min.js"></script>
   <script src="recursos/jquery.min.js"></script>
   <script src="recursos/sweetalert.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+  </style>
 
   <title>Visuales</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortct icon" href="Iconos/visual.png">
+  <script src="js/cambiarModo.js"></script>
   <script src="js/session.js"></script>
   <script src="js/main.js"></script>
 </head>
 
 <body class="bg-primary">
-  <div class="container col-md-4 mt-5 hidden-sm bg-light rounded align-middle">
+  <div class="container col-md-4 hidden-sm bg-light rounded" id="form-login">
+    <a href="#" id="configuracion"><img src="iconos/ruedita.png" class="img-fluid mx-auto d-block float-left"alt="configuracion"></a>
     <img src="iconos/visual.png" class="img-fluid mx-auto d-block" alt="logo_visual">
     <p class="h1 col-md-6 mx-auto text-center">VISUALES</p>
     <form class="px-4 py-3" id="form-sign-in">

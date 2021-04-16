@@ -1,3 +1,26 @@
+*{
+    font-family: 'Kiwi Maru', serif;
+    font-size: 14px;
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body{
+    margin: 0;
+    margin-bottom: 40px;
+}
+
+#configuracion{
+    cursor: pointer;
+}
+
+#form-login{
+    margin-top: 12%;
+}
+
 .hidden{
     display: none;
 }
@@ -32,4 +55,88 @@ input[type="checkbox"]{
 
 label{
     cursor: pointer;
+}
+
+textarea{
+    resize: none;
+}
+
+.center{
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
+
+#footerButton{
+    width: 75px;
+    height: 75px;
+}
+
+@media (max-width: 1800px){
+    *{
+        font-size: 13px;
+    }
+
+    #footerButton{
+        width: 65px;
+        height: 65px;
+    }
+}
+
+@media (max-width: 1900px){
+    *{
+        font-size: 13.5px;
+    }
+}
+
+@media (max-width: 1200px){
+    *{
+        font-size: 12px;
+    }
+
+    #footerButton{
+        width: 55;
+        height: 55px;
+    }
+}
+
+@media (max-width: 1000px){
+    *{
+        font-size: 9px;
+    }
+
+    #footerButton{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 745px){
+    *{
+        font-size: 9.5px;
+    }
+
+    #modalFooter{
+        height: 200;
+    }
+
+    #footerButton{
+        width: 45;
+        height: 45px;
+    }
+}
+
+@media (max-width: 600px){
+    *{
+        font-size: 8px;
+    }
+
+    #footerButton{
+        width: 40px;
+        height: 40px;
+    }
 }

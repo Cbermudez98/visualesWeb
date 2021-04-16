@@ -98,7 +98,7 @@ const verUser = () => {
 
 window.onload = () => {
     validarLog();
-    verUser();
+    //verUser();
     render();
     const logOutbtn = document.getElementById('logout');
 

@@ -1,3 +1,6 @@
+let modo = "";
+let moto = "";
+
 const validarUsuario = (userReq) => {
     try {
         let user = userReq.value.toUpperCase();
@@ -87,7 +90,7 @@ const recolectarData = (user, pass) => {
         let pw = validarPassword(pass);
         if (us || pw) {
 
-            const datos = { "peticion":"logIn","usuario": us, "password": pw };
+            const datos = { "peticion": "logIn", "usuario": us, "password": pw };
             $.ajax({
                 url: "modelo/usuarioModelo.php",
                 data: datos,
@@ -107,8 +110,101 @@ const recolectarData = (user, pass) => {
     }
 }
 
+const cambiarModo = () => {
+    try {
+        swal({
+            title: "Confirmar",
+            text: "¿Activar el modo preventiva?",
+            icon: "warning",
+            buttons: {
+                cancel: "NO",
+                confirmar: {
+                    title: "Exito",
+                    text: "SI"
+                }
+            }
+        }).then((change) => {
+            if (change) {
+                modo = "true";
+                swal({
+                    icon: "success",
+                    title: "Exito",
+                    text: "Ha cambiado al modo preventiva"
+                }).then(()=>{
+                    cambiarMoto();
+                })
+            } else {
+                modo = "false";
+                swal({
+                    icon: "success",
+                    title: "Exito",
+                    title: "Ha cambiado al modo normal"
+                }).then(()=>{
+                    cambiarMoto();
+                })
+            }
+        })
+    } catch (error) {
+        swal({
+            icon: "error",
+            title: "Error",
+            text: "en el cambio de moto " + error
+        })
+    }
+}
+
+const cambiarMoto = () => {
+    try {
+        swal({
+            icon: "warning",
+            title: "Confirmar",
+            text: "¿Activar modo motocicleta?",
+            buttons: {
+                cancel: "NO",
+                confimar: {
+                    title: "Exito",
+                    text: "SI"
+                }
+            }
+        }).then((change) => {
+            if (change) {
+                moto = "true";
+                swal({
+                    icon: "success",
+                    title: "Exito",
+                    text: "Ha cambiado a modo motocicleta"
+                }).then(()=>{
+                    cambiarModoConfig(modo,moto);
+                })
+            } else {
+                moto = "false";
+                swal({
+                    icon: "success",
+                    title: "Exito",
+                    text: "ha cambiado modo normal"
+                }).then(()=>{
+                    cambiarModoConfig(modo,moto);
+                })
+            }
+        })
+    } catch (error) {
+        swal({
+            icon: "error",
+            title: "Error",
+            text: "al cambiar al modo moto " + error
+        })
+    }
+}
+
 window.onload = () => {
     validarLog1();
+    
+    const buttonChange = document.getElementById('configuracion');
+    buttonChange.addEventListener('click', (e) => {
+        e.preventDefault();
+        cambiarModo();
+    });
+
     const form = document.getElementById('form-sign-in');
 
     form.onsubmit = (e) => {

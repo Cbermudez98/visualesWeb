@@ -86,6 +86,78 @@ const limpiarTablaModal = () => {
     try {
         $('#modalDefectos').on('hidden.bs.modal', () => {
             document.getElementById('tbodyDefectos').innerHTML = "";
+            document.getElementById('observaciones').value = "";
+            if(document.getElementById('lBajaSimultDer').checked){
+                document.getElementById('lBajaSimultDer').checked = false;
+            }
+            //Limpiar checkbox
+            if(document.getElementById('lBajaSimultIzq').checked){
+                document.getElementById('lBajaSimultIzq').checked = false;
+            }
+
+            if(document.getElementById('lAltaSimultDer').checked){
+                document.getElementById('lAltaSimultDer').checked = false;
+            }
+
+            if(document.getElementById('lAltaSimultIzq').checked){
+                document.getElementById('lAltaSimultIzq').checked = false;
+            }
+
+            if(document.getElementById('lAntiSimultDer').checked){
+                document.getElementById('lAntiSimultDer').checked = false;
+            }
+
+            if(document.getElementById('lAntiSimultIzq').checked){
+                document.getElementById('lAntiSimultIzq').checked = false;
+            }
+
+            //Limpiar tabla labrado Izquierdo
+            document.getElementById('laIzEj1').value = "";
+            document.getElementById('laIzEj2').value = "";
+            document.getElementById('laIzEj21').value = "";
+            document.getElementById('laIzEj3').value = "";
+            document.getElementById('laIzEj31').value = "";
+            document.getElementById('laIzEj4').value = "";
+            document.getElementById('laIzEj41').value = "";
+            document.getElementById('laIzEj5').value = "";
+            document.getElementById('laIzEj51').value = "";
+            document.getElementById('laIzRes').value = "";
+
+            //Limpiar Tabla labrado Derecho
+            document.getElementById('laDeEj1').value = "";
+            document.getElementById('laDeEj2').value = "";
+            document.getElementById('laDeEj21').value = "";
+            document.getElementById('laDeEj3').value = "";
+            document.getElementById('laDeEj31').value = "";
+            document.getElementById('laDeEj4').value = "";
+            document.getElementById('laDeEj41').value = "";
+            document.getElementById('laDeEj5').value = "";
+            document.getElementById('laDeEj51').value = "";
+            document.getElementById('laDeRes').value = "";
+
+            //Limpiar tabla presion Izquierda
+            document.getElementById('PrIzEj1').value = "";
+            document.getElementById('PrIzEj2').value = "";
+            document.getElementById('PrIzEj21').value = "";
+            document.getElementById('PrIzEj3').value = "";
+            document.getElementById('PrIzEj31').value = "";
+            document.getElementById('PrIzEj4').value = "";
+            document.getElementById('PrIzEj41').value = "";
+            document.getElementById('PrIzEj5').value = "";
+            document.getElementById('PrIzEj51').value = "";
+            document.getElementById('PrIzRes').value = "";
+
+            //Limpiar tabla presion Derecha
+            document.getElementById('PrDeEj1').value = "";
+            document.getElementById('PrDeEj2').value = "";
+            document.getElementById('PrDeEj21').value = "";
+            document.getElementById('PrDeEj3').value = "";
+            document.getElementById('PrDeEj31').value = "";
+            document.getElementById('PrDeEj4').value = "";
+            document.getElementById('PrDeEj41').value = "";
+            document.getElementById('PrDeEj5').value = "";
+            document.getElementById('PrDeEj51').value = "";
+            document.getElementById('PrDeRes').value = "";
         })
     } catch (error) {
         swal({
@@ -137,11 +209,12 @@ const modificarValorResultado = (index) => {
             
             case "I":
                 celda.innerHTML = "NA";
+                cambiarColorFilaDefectos(index);
                 break;
             
             case "NA":
                 celda.innerHTML = "R";
-                cambiarColorFilaDefectos(index);
+                //cambiarColorFilaDefectos(index);
             default:
                 break;
         }
@@ -178,9 +251,9 @@ const modificarResultado = () => {
 const cargarTablaDefectos = (vehiculo) => {
     try {
         mostrarModal();
-        limpiarModal();
         llenarModalHeader(vehiculo);
         requerirDatos(vehiculo.clase);
+        limpiarModal();
         limpiarTablaModal();
     } catch (error) {
         swal({
