@@ -80,33 +80,29 @@
             }
         }
         //Cotejar los datos de dos consultas para mostrar en el frontend en la tabla modal defectos
-        public function verificarRevision($consevutivo){
+        public function verificarRevision($fecha,$placa){
             try {
                 $rev = new revisionController();
-                $res = $rev->verficiarRevision($consevutivo);
-                echo $res;
+                $res = $rev->verficiarRevisionAnterior($fecha,$placa);
+                return $res;
             } catch (EXception $e) {
                 $mensaje = array('type'=>'error','mensaje'=>'Error al verificar la revision del automovil '.$e);
-                echo json_encode($mensaje);
+                return json_encode($mensaje);
             }
         }
 
         public function validardias($fecha,$placa){
             try {
                 $re = new revisionController();
-                $res = $re->validarDiasRevision($fecha,$placa);
+                $fechaA = strtotime('-15 day',strtotime($fecha));
+                $date = date('Y-m-d',$fechaA);
+                $res = $re->validarDiasRevision($date,$fecha,$placa);
                 $mensaje = "";
-                $r = json_decode($res,true);
-
-                foreach ($r as $k) {
-                    $cadena = "La diferencia de dias es de ".$k['dias_transcurridos'];
-                    if((int)$k['dias_transcurridos'] > 15){
-                        $mensaje = "false";
-                    } else {
-                        $mensaje = "true";
-                    }
+                if($res == "vacio"){
+                    $mensaje = "false";
+                } else {
+                    $mensaje = "true";
                 }
-
                 return $mensaje;
             } catch (EXception $e) {
                 $mensaje = array('type'=>'error','mensaje'=>'error en la consulta '.$e);
@@ -130,9 +126,8 @@
         }
     }
 
-    $re = new Revision();
-    $res = $re->validarDias('2021-04-10',"NBZ874");
-    //$re->verificarRevision('20082253');
-    echo $res;
-    
+    //$re = new Revision();
+    //echo $res = $re->validarDias('2021-04-17',"SDH09E");
+    //$re->verificarRevision('2020-09-28','SDH09E');
+    //echo $res;
 ?>

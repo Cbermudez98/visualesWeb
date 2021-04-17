@@ -1,6 +1,6 @@
-const requerirDatos = (tipoVehiculo) => {
+const requerirDatos = (vehiculo) => {
     try {
-        const dato = {'peticion':'llenarTablaDefecto','tipoVehiculo':tipoVehiculo}
+        const dato = {'peticion':'llenarTablaDefecto','tipoVehiculo':vehiculo.clase,'fecha':vehiculo.fecha,'placa':vehiculo.targa};
         $.ajax({
             url: 'modelo/defectoModel.php',
             data: dato,
@@ -40,7 +40,7 @@ const llenarModalHeader = (vehiculo) => {
         swal({
             icon: "error",
             title: "Error",
-            text: "al formatear la informacion del modal"
+            text: "al formatear la informacion del modal " +error
         })
     }
 }
@@ -252,7 +252,8 @@ const cargarTablaDefectos = (vehiculo) => {
     try {
         mostrarModal();
         llenarModalHeader(vehiculo);
-        requerirDatos(vehiculo.clase);
+        requerirDatos(vehiculo);
+        //alert(JSON.stringify(vehiculo))
         limpiarModal();
         limpiarTablaModal();
     } catch (error) {

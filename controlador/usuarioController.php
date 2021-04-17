@@ -32,7 +32,7 @@
                     $mensaje = array("type"=>"success","mensaje"=>$_SESSION['user']);
                     return $mensaje;
                 }
-
+                $this->db = null;
             } catch (PDOException $e) {
                 $mensaje = array("type"=>"error","mensaje"=>"Error al verificar los datos ".$e);
                 return $mensaje;

@@ -26,53 +26,53 @@
                     //Se devulve un array asosiativo y lo transformo en json para enviarlo al frontend
                     echo json_encode($res);
                 }
+                $this->db = null;
             } catch (PDOException $e) {
                 $mensaje = array('type'=>'error','mensaje'=>'Error en la consulta a la base de datps');
                 return $mensaje;
             }
         }
-
-        public function validarDiasRevision($fecha,$placa){
+        //funcion para validar si hubo una revision los dias anteriores no superiores a los 15 dias habiles
+        public function validarDiasRevision($fechaA,$fecha,$placa){
             try {
-                $sql = $this->db->prepare("SELECT TIMESTAMPDIFF(DAY,'".$fecha."',CURDATE()) AS dias_transcurridos FROM visual WHERE placa = '".$placa."' ORDER BY consecutivowil ASC limit 1");
+                $sql = $this->db->prepare("SELECT * FROM visual WHERE fechainicial BETWEEN '".$fechaA."' AND curdate() and placa='".$placa."' order by consecutivowil desc limit 1");
                 $sql->execute();
                 $res = $sql->fetchAll(PDO::FETCH_ASSOC);
                 if(!$res){
-                    $mensaje = array('type'=>'error','mensaje'=>'no se entro dato');
-                    return json_encode($mensaje);
+                    return "vacio";
                 } else {
                     $mensaje = json_encode($res);
                     return $mensaje;
                 }
-
+                $this->db = null;
             } catch (PDOEXception $e) {
-                $mensaje = array('error'=>'error','mensaje'=>'Error al ejecutar la consulta '.$e);
+                $mensaje = array('type'=>'error','mensaje'=>'Error al ejecutar la consulta '.$e);
                 return json_encode($mensaje);
             }
         }
-
-        public function verficiarRevision($consecutivo){
+        //Funcion que se ejecutara cuando se detecte el mismo vehiculo en un intervalo menor a 15 dias
+        public function verficiarRevisionAnterior($placa,$num){
             try {
-                $query = $this->db->prepare("SELECT resultado,codigodefecto,tipo FROM visual where consecutivowil = '".$consecutivo."' and resultado = 'I'");
+                $query = $this->db->prepare("SELECT DISTINCT defectos.grupo, defectos.descripcion, defectos.tipo, visual.resultado, defectos.codError FROM defectos,visual WHERE visual.placa = '".$placa."' AND defectos.tipo != '' order by visual.consecutivowil desc limit '".$num."'");
                 $query->execute();
 
                 $res = $query->fetchALL(PDO::FETCH_ASSOC);
-
+                //se devuelve un array con las revisiones ojo, se tiene que limitar por el tipo de vehiculo moto 47 defectos... etc
                 if($res){
-                    echo json_encode($res);
+                    return json_encode($res);
                 }else{
                     $mensaje = array('type'=>'error','mensaje'=>'No se encontraron datos');
-                    echo json_encode($mensaje);
+                    return json_encode($mensaje);
                 }
-
+                $this->db = null;
             } catch (PDOEXception $e) {
                 $mensaje = array('type'=>'error','mensaje'=>'Error en la consulta de revision '.$e);
-                echo json_encode($mensaje);
+                return json_encode($mensaje);
             }
         }
     }
 
     //$rc = new revisionController();
     //$rc->verficiarRevision('20082251');
-    //$rc->validarDiasRevision('2020-09-28',"SDH09E");
+    //echo $rc->validarDiasRevision('2020-09-28','2021-04-17',"SDH09E");
 ?>
