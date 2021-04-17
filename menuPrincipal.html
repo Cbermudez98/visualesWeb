@@ -1,35 +1,247 @@
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-<div class="conteiner col-md-8">
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-    </table>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="recursos/jquery-3.5.1.slim.min.js"></script>
+  <script src="recursos/jquery.min.js"></script>
+  <script src="recursos/sweetalert.min.js"></script>
+  <script src="recursos/bootstrap.min.js"></script>
+  <script src="recursos/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="recursos/bootstrap.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+  </style>
+  
+  <title>Visuales</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortct icon" href="Iconos/visual.png">
+  <script src="js/cargarTablaDefectos.js"></script>
+  <script src="js/cargarTabla.js"></script>
+  <script src="js/session.js"></script>
+  
+</head>
+
+<body class="bg-white">
+  <nav class="navbar navbar-primary bg-primary text-center">
+    <div class="container">
+      <div class="mx-auto">
+        <div class="col-lg-12">
+          <img src="Iconos/logoAutotest.png" class="img-fluid" width="240" height="120" alt="Logo Autotest s.a.s">
+      </div>
+    </div>
 </div>
+  </nav>
+
+  <div class="table-responsive table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl overflow-auto h-75 w-100 min-vh-50 min-vw-50" id="tablaVehiculosContainer">
+    <table class="table table-hover overflow-auto" id="tablaVehiculos">
+      <thead class="bg-ligt">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Consecutivo</th>
+          <th scope="col">Placa</th>
+          <th scope="col">Vehiculo</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody id='tbody'>
+        
+      </tbody>
+    </table>
+
+    <div class="modal fade" id="modalDefectos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <p class="text-info mr-2">Consecutivo: <small class="text-dark" id="consecutivo"></small></p>
+            <p class="text-info mr-2">Fecha: <small class="text-dark" id="fecha"></small></p>
+            <p class="text-info mr-2">Hora: <small class="text-dark" id="hora"></small></p>
+            <p class="text-info mr-2">Placa: <small class="text-dark" id="placa"></small></p>
+            <p class="text-info mr-2">Tipo Vehiculo: <small class="text-dark" id="tipoVehiculo"></small></p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-hover" id="tablaDefectos">
+              <thead class="bg-ligt">
+                <tr>
+                  <th scope="col">Grupo</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Resultado</th>
+                  <th scope="col">CodError</th>
+                </tr>
+              </thead>
+              <tbody id='tbodyDefectos'>
+                
+              </tbody>
+            </table>
+          </div>
+          <!--Terminar de cuadar esta parte del codigo que siempre esta arriba-->
+          <div class="modal-footer table-responsive table-responsive-sm table-responsive-md table-sm" id="modalFooter">
+            <!--Tabla de labrado mas inputs-->
+            <table class="table table-condensed table-striped" id="tablaInternaDefectos">
+              <thead>
+                <tr>
+                  <th scope="col">labrado</th>
+                  <th scope="col">Eje1</th>
+                  <th scope="col">Eje2</th>
+                  <th scope="col">Eje2</th>
+                  <th scope="col">Eje3</th>
+                  <th scope="col">Eje3</th>
+                  <th scope="col">Eje4</th>
+                  <th scope="col">Eje4</th>
+                  <th scope="col">Eje5</th>
+                  <th scope="col">Eje5</th>
+                  <th scope="col">Repuesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Izquierda</th>
+                  <td><input class="form-control form-control-sm" id="laIzEj1" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzEj2" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzEj21" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzEj3" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzEj31" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzEj4" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzEj41" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzEj5" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzEj51" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laIzRes" min="0" type="number"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Derecha</th>
+                  <td><input class="form-control form-control-sm" id="laDeEj1" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeEj2" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeEj21" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeEj3" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeEj31" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeEj4" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeEj41" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeEj5" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeEj51" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="laDeRes" min="0" type="number"></td>
+                </tr>
+              </tbody>
+            </table>
+            <!--Fin de tabla de labrado-->
+            <!--Tabla de presion-->
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Presión</th>
+                  <th scope="col">Eje1</th>
+                  <th scope="col">Eje2</th>
+                  <th scope="col">Eje2</th>
+                  <th scope="col">Eje3</th>
+                  <th scope="col">Eje3</th>
+                  <th scope="col">Eje4</th>
+                  <th scope="col">Eje4</th>
+                  <th scope="col">Eje5</th>
+                  <th scope="col">Eje5</th>
+                  <th scope="col">Repuesto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Izquierda</th>
+                  <td><input class="form-control form-control-sm" id="PrIzEj1" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzEj2" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzEj21" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzEj3" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzEj31" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzEj4" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzEj41" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzEj5" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzEj51" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrIzRes" min="0" type="number"></td>
+                </tr>
+                <tr>
+                  <th scope="row">Derecha</th>
+                  <td><input class="form-control form-control-sm" id="PrDeEj1" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeEj2" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeEj21" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeEj3" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeEj31" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeEj4" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeEj41" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeEj5" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeEj51" min="0" type="number"></td>
+                  <td><input class="form-control form-control-sm" id="PrDeRes" min="0" type="number"></td>
+                </tr>
+              </tbody>
+            </table>
+            <!--Checkbox para simultaneas-->
+            
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lBajaSimultDer">
+              <label class="form-check-label" for="lBajaSimultDer">
+                L. Baja Simultanea Der
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lBajaSimultIzq">
+              <label class="form-check-label" for="lBajaSimultIzq">
+                L. Baja Simultanea Izq
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lAltaSimultDer">
+              <label class="form-check-label" for="lAltaSimultDer">
+                L. Alta Simultanea Der
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lAltaSimultIzq">
+              <label class="form-check-label" for="lAltaSimultIzq">
+                L. Alta Simultanea Izq
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lAntiSimultDer">
+              <label class="form-check-label" for="lAntiSimultDer">
+                L. Anti Simultanea Der
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="" id="lAntiSimultIzq">
+              <label class="form-check-label" for="lAntiSimultIzq">
+                L. Anti Simultanea Izq
+              </label>
+            </div>
+            <!--Observaciones-->
+            <div class="form-group col-12">
+              <label for="observaciones" class="h6">Observaciones</label>
+              <textarea class="form-control" id="observaciones" rows="2"></textarea>
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="bg-primary fixed-bottom row">
+    <div class="col-lg-12">
+      <div class="px-2 pt-2 pb-2 float-left">
+        <a type="button" class="" href="#" id="logout"><img class="img-fluid mx-auto" id="footerButton" src="iconos/iconfalse_1.png" alt=""></a>
+        <a type="button" class="" href="#" id=""><img class="img-fluid mx-" id="footerButton" src="iconos/iconoajuste.png" alt=""></a>
+        <a type="button" class="" href="#" id=""><img class="img-fluid mx-auto" id="footerButton" src="iconos/iconoagergar.png" alt=""></a>
+        <a type="button" class="" href="#" id=""><img class="img-fluid mx-auto" id="footerButton" src="iconos/iconoquitar.png" alt=""></a>
+        <a type="button" class="" href="#" id=""><img class="img-fluid mx-auto" id="footerButton" src="iconos/iconoabrircam.png" alt=""></a>
+        <!--<p class="font-weight-bold text-right text-danger" id="userLog"></p>-->
+      </div>
+      <div class="px-2 pt-2 pb-2 float-right">
+        <a type="button" class="" href="#" id=""><img class="img-fluid mx-auto" id="footerButton" src="iconos/iconocargar.png" alt=""></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

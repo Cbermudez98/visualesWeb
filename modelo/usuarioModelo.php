@@ -23,7 +23,7 @@
         public function setUsuario($usuario){
             $this->Usuario = $usuario;
         }
-
+        
         public function setPassword($password){
             $this->Password = $password;
         }
@@ -37,17 +37,46 @@
                     $userC = new usuarioController();
                     $res = $userC->validarUsuario($this->Usuario,$this->Password);
                     echo json_encode($res);
-                    //$mensaje = array("type"=>"success","mensaje"=>"Bienvenido ".$this->usuario);
-                    //echo json_encode($mensaje);
                 }
             } catch (EXception $e) {
                 $mensaje = array("type"=>"error","mensaje"=>"Un error ha ocurrido ".$e);
             }
         }
+
+        public function salir($user){
+            try {
+                $userC = new usuarioController();
+                $res = $userC->logOut($user);
+                return $res;
+            } catch (EXception $e) {
+                $mensaje = array("type"=>"error","mensaje"=>"Se ha producido un error al salir");
+                return $mensaje;
+            }
+        }
     }
-    $user = new Usuario();
-    $user->setUsuario($_POST['usuario']);
-    $pwd = base64_encode($_POST['password']);
-    $user->setPassword($pwd);
-    $user->validarData();
+    if(isset($_POST['peticion'])){
+        $peticion = $_POST['peticion'];
+
+        switch ($peticion) {
+            case 'logIn':
+                $user = new Usuario();
+                $user->setUsuario($_POST['usuario']);
+                $pwd = base64_encode($_POST['password']);
+                $user->setPassword($pwd);
+                $user->validarData();   
+                break;
+            case 'logOut':
+                session_start();
+                if(isset($_SESSION['user'])){
+                    $user = new Usuario();
+                    $res = $user->salir($_SESSION['user']);
+                    echo json_encode($res);
+                }
+            default:
+                # code...
+                break;
+        }
+    }
+    
+    
 ?>
