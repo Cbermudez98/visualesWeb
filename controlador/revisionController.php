@@ -1,5 +1,5 @@
 <?php
-    //session_start();
+    session_start();
     if(!isset($_SESSION['user'])){
         die("No tiene autorizacion para estar aqui");
     }
@@ -41,8 +41,9 @@
                 if(!$res){
                     return "vacio";
                 } else {
-                    $mensaje = json_encode($res);
-                    return $mensaje;
+                    //$mensaje = json_encode($res);
+                    //return $mensaje;
+                    return "true";
                 }
                 $this->db = null;
             } catch (PDOEXception $e) {
@@ -53,7 +54,7 @@
         //Funcion que se ejecutara cuando se detecte el mismo vehiculo en un intervalo menor a 15 dias
         public function verficiarRevisionAnterior($placa,$num){
             try {
-                $query = $this->db->prepare("SELECT DISTINCT defectos.grupo, defectos.descripcion, defectos.tipo, visual.resultado, defectos.codError FROM defectos,visual WHERE visual.placa = '".$placa."' AND defectos.tipo != '' order by visual.consecutivowil desc limit '".$num."'");
+                $query = $this->db->prepare("SELECT DISTINCT defectos.grupo, defectos.descripcion, defectos.tipo, visual.resultado, defectos.codError FROM defectos,visual WHERE visual.placa = '".$placa."' AND defectos.tipo != '' order by visual.consecutivowil desc limit ".$num."");
                 $query->execute();
 
                 $res = $query->fetchALL(PDO::FETCH_ASSOC);
@@ -71,6 +72,26 @@
             }
         }
     }
+
+    if(isset($_POST['peticion'])){
+        $peticion = $_POST['peticion'];
+        switch ($peticion) {
+            case 'llenarTabla':
+                $rev = new revisionController();
+                $res = $rev->listarVehiculos();
+                echo $res;
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+    }
+
+    //$re = new Revision();
+    //echo $res = $re->validarDias('2021-04-17',"SDH09E");
+    //$re->verificarRevision('2020-09-28','SDH09E');
+    //echo $res;
 
     //$rc = new revisionController();
     //$rc->verficiarRevision('20082251');

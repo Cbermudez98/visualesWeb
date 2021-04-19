@@ -6,7 +6,7 @@ const render = () => {
         const tabla = document.getElementById('tbody');
         const peticion = { "peticion": "llenarTabla" };
         $.ajax({
-            url: "modelo/revisionModel.php",
+            url: "controlador/revisionController.php",
             data: peticion,
             type: "POST",
             success: ((res) => {

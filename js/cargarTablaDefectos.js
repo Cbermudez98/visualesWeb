@@ -1,20 +1,20 @@
 const requerirDatos = (vehiculo) => {
     try {
-        const dato = {'peticion':'llenarTablaDefecto','tipoVehiculo':vehiculo.clase,'fecha':vehiculo.fecha,'placa':vehiculo.targa};
+        const dato = { 'peticion': 'llenarTablaDefecto', 'tipoVehiculo': vehiculo.clase, 'fecha': vehiculo.fecha, 'placa': vehiculo.targa };
         $.ajax({
-            url: 'modelo/defectoModel.php',
+            url: 'controlador/controladorDefecto.php',
             data: dato,
             type: 'POST',
             success: (res) => {
-               if(res.type == "error"){
-                   swal({
-                       icon: "error",
-                       title: "Error",
-                       text: res.mensaje
-                   })
-               } else {
-                   llenarTablaModal(res);
-               }
+                if (res.type == "error") {
+                    swal({
+                        icon: "error",
+                        title: "Error",
+                        text: res.mensaje
+                    })
+                } else {
+                    llenarTablaModal(res);
+                }
             }
 
         })
@@ -40,7 +40,27 @@ const llenarModalHeader = (vehiculo) => {
         swal({
             icon: "error",
             title: "Error",
-            text: "al formatear la informacion del modal " +error
+            text: "al formatear la informacion del modal " + error
+        })
+    }
+}
+
+const cambiarColorPrincipal = () => {
+    try {
+        const listaDefecto = document.getElementById('tbodyDefectos');
+        listaDefecto.forEach((e, i) => {
+            const fila = listaDefecto.getElementsByTagName("tr")[i];
+            const celda = fila.getElementsByTagName('td')[3];
+            if (celda.innerHTML = "I") {
+                cambiarColorFilaDefectos(i);
+            }
+        });
+
+    } catch (error) {
+        swal({
+            icon: "error",
+            title: "Error",
+            text: "error en la funcion de cambiarColorPrincipal " + error
         })
     }
 }
@@ -50,16 +70,15 @@ const llenarTablaModal = (x) => {
         //Recibe un arreglo de objetos se debe iterar para mostrar en la tabla
         let tr = JSON.parse(x);
         const tbodyD = document.getElementById('tbodyDefectos');
-        const res = tr.map(r => '<tr><td scope="col">'+r.grupo+'</td><td scope="col">'+r.descripcion+'</td><td scope="col">'+r.tipo+'</td><td scope="col">R</td><td scope="col">'+r.codError+'</td></tr>');
+        const res = tr.map(r => '<tr><td scope="col" value="'+r.grupo+'">' + r.grupo + '</td><td scope="col" value="'+r.descripcion+'">' + r.descripcion + '</td><td scope="col" value="'+r.tipo+'">' + r.tipo + '</td><td scope="col" value="R">R</td><td scope="col" value="'+r.codError+'">' + r.codError + '</td></tr>');
         //console.log(JSON.stringify(res));
         tbodyD.innerHTML = res.join("");
         modificarResultado();
-
     } catch (error) {
         swal({
             icon: "error",
             title: "Error",
-            text: "al llenar la tabla en el modal "+error
+            text: "al llenar la tabla en el modal " + error
         })
     }
 }
@@ -77,7 +96,7 @@ const limpiarModal = () => {
         swal({
             icon: "error",
             title: "Error",
-            text: "al limpiar la ventana modal "+error
+            text: "al limpiar la ventana modal " + error
         })
     }
 }
@@ -87,27 +106,27 @@ const limpiarTablaModal = () => {
         $('#modalDefectos').on('hidden.bs.modal', () => {
             document.getElementById('tbodyDefectos').innerHTML = "";
             document.getElementById('observaciones').value = "";
-            if(document.getElementById('lBajaSimultDer').checked){
+            if (document.getElementById('lBajaSimultDer').checked) {
                 document.getElementById('lBajaSimultDer').checked = false;
             }
             //Limpiar checkbox
-            if(document.getElementById('lBajaSimultIzq').checked){
+            if (document.getElementById('lBajaSimultIzq').checked) {
                 document.getElementById('lBajaSimultIzq').checked = false;
             }
 
-            if(document.getElementById('lAltaSimultDer').checked){
+            if (document.getElementById('lAltaSimultDer').checked) {
                 document.getElementById('lAltaSimultDer').checked = false;
             }
 
-            if(document.getElementById('lAltaSimultIzq').checked){
+            if (document.getElementById('lAltaSimultIzq').checked) {
                 document.getElementById('lAltaSimultIzq').checked = false;
             }
 
-            if(document.getElementById('lAntiSimultDer').checked){
+            if (document.getElementById('lAntiSimultDer').checked) {
                 document.getElementById('lAntiSimultDer').checked = false;
             }
 
-            if(document.getElementById('lAntiSimultIzq').checked){
+            if (document.getElementById('lAntiSimultIzq').checked) {
                 document.getElementById('lAntiSimultIzq').checked = false;
             }
 
@@ -158,6 +177,7 @@ const limpiarTablaModal = () => {
             document.getElementById('PrDeEj5').value = "";
             document.getElementById('PrDeEj51').value = "";
             document.getElementById('PrDeRes').value = "";
+            objRevision = [];
         })
     } catch (error) {
         swal({
@@ -188,7 +208,7 @@ const cambiarColorFilaDefectos = (index) => {
         swal({
             icon: "error",
             title: "Error",
-            text: "al modificar el color de la fila "+error
+            text: "al modificar el color de la fila " + error
         })
     }
 }
@@ -200,32 +220,35 @@ const modificarValorResultado = (index) => {
         const fila = listaDefecto.getElementsByTagName("tr")[index];
         const celda = fila.getElementsByTagName('td')[3];
         celdaT = celda.innerHTML;
-        
+
         switch (celdaT) {
             case "R":
                 celda.innerHTML = "I";
+                celda.setAttribute("value","I");
                 cambiarColorFilaDefectos(index);
                 break;
-            
+
             case "I":
                 celda.innerHTML = "NA";
+                celda.setAttribute("value","NA");
                 cambiarColorFilaDefectos(index);
                 break;
-            
+
             case "NA":
                 celda.innerHTML = "R";
-                //cambiarColorFilaDefectos(index);
+                celda.setAttribute("value","R");
+            //cambiarColorFilaDefectos(index);
             default:
                 break;
         }
 
-        
-        
+
+
     } catch (error) {
         swal({
             icon: "error",
             title: "Error",
-            text: "al modificar el valor del resultado "+error
+            text: "al modificar el valor del resultado " + error
         })
     }
 }
@@ -233,9 +256,9 @@ const modificarValorResultado = (index) => {
 const modificarResultado = () => {
     try {
         const filasDefectos = document.querySelectorAll('#tbodyDefectos tr');
-        
-        filasDefectos.forEach((fd,i) => {
-            fd.addEventListener('click',()=>{
+
+        filasDefectos.forEach((fd, i) => {
+            fd.addEventListener('click', () => {
                 modificarValorResultado(i);
             });
         });
@@ -243,7 +266,7 @@ const modificarResultado = () => {
         swal({
             icon: "error",
             title: "Error",
-            text: "al modificar el resultado "+error
+            text: "al modificar el resultado " + error
         })
     }
 }
@@ -253,6 +276,7 @@ const cargarTablaDefectos = (vehiculo) => {
         mostrarModal();
         llenarModalHeader(vehiculo);
         requerirDatos(vehiculo);
+        obtenerInfo();
         //alert(JSON.stringify(vehiculo))
         limpiarModal();
         limpiarTablaModal();

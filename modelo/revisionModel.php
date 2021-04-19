@@ -1,10 +1,4 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['user'])){
-        die("Error no tiene autorizacion para estar aqui");
-    }
-
-    require_once('../controlador/revisionController.php');
     class Revision{
         public $fecha;
         public $hora;
@@ -69,7 +63,7 @@
             $this->visible = $visible;
         }
 
-        public function peticionDatos(){
+        /*public function peticionDatos(){
             try {
                 $rev = new revisionController();
                 $res = $rev->listarVehiculos();
@@ -108,26 +102,8 @@
                 $mensaje = array('type'=>'error','mensaje'=>'error en la consulta '.$e);
                 return $mensaje;
             }
-        }
+        }*/
     }
 
-    if(isset($_POST['peticion'])){
-        $peticion = $_POST['peticion'];
-        switch ($peticion) {
-            case 'llenarTabla':
-                $rev = new Revision();
-                $res = $rev->peticionDatos();
-                echo $res;
-                break;
-            
-            default:
-                # code...
-                break;
-        }
-    }
-
-    //$re = new Revision();
-    //echo $res = $re->validarDias('2021-04-17',"SDH09E");
-    //$re->verificarRevision('2020-09-28','SDH09E');
-    //echo $res;
+    
 ?>
